@@ -5,7 +5,7 @@
 - react : UI, SPA
 - react router : 페이지 처리
 - styled-components
-- redux : 상태관리
+- redux : 상태관리 -> redux-toolkit으로 변경(보일러 플레이트 제거, store 설정 단순화를 위해) 
 - axios : API통신
 - vite : 번들링
 
