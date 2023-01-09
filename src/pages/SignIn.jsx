@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { signIn } from '../UserSlice';
 
 const StyledSignIn = styled.div`
   background-color: #ffb862;
@@ -57,18 +59,44 @@ const StyledSignIn = styled.div`
 `;
 
 export default function SignIn() {
+  const [userId, setUserId] = useState('');
+  const [userPw, setUserPw] = useState('');
+
+  // const dispatch = useDispatch();
+
+  const onSubmit = () => {
+    console.log('로그인', 'id: ', userId, 'pw: ', userPw);
+
+    // 로그인 성공시 redux 적용예정
+    // dispatch(signIn());
+  };
+
   return (
     <StyledSignIn>
       <h2 className="title"> 어서오세요👻 </h2>
       <div className="input-box">
         <label>
-          <input className="input" type="text" placeholder="아이디" />
+          <input
+            className="input"
+            type="text"
+            placeholder="아이디"
+            onChange={(e) => setUserId(e.target.value)}
+            value={userId}
+          />
         </label>
         <label>
-          <input className="input" type="password" placeholder="비밀번호" />
+          <input
+            className="input"
+            type="password"
+            placeholder="비밀번호"
+            onChange={(e) => {
+              setUserPw(e.target.value);
+            }}
+            value={userPw}
+          />
         </label>
       </div>
-      <button>로그인</button>
+      <button onClick={onSubmit}>로그인</button>
     </StyledSignIn>
   );
 }
