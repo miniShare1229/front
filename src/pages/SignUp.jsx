@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const StyledSignUp = styled.div`
   background-color: #39557e;
@@ -127,6 +128,7 @@ export default function SignUp() {
           />
         </label>
       </div>
+      <Link to="/sign-in">이미 계정이 있으신가요?</Link>
       <button onClick={onSubmit}>회원가입</button>
     </StyledSignUp>
   );

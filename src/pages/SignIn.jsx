@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
 // import { useSelector, useDispatch } from 'react-redux';
 // import { signIn } from '../UserSlice';
 
@@ -96,6 +98,7 @@ export default function SignIn() {
           />
         </label>
       </div>
+      <Link to="/sign-up">계정이 없으신가요?</Link>
       <button onClick={onSubmit}>로그인</button>
     </StyledSignIn>
   );
