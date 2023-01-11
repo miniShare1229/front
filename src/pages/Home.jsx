@@ -7,6 +7,7 @@ import { plus, minus } from '../reducer';
 function Home() {
   const testData = useSelector((state) => state.test.value);
   const dispatch = useDispatch();
+  const userState = useSelector((state) => state.user);
 
   return (
     <div>
@@ -22,6 +23,8 @@ function Home() {
           <button onClick={() => dispatch(minus())}>-</button>
         </div>
       </div>
+      <p>userID : {userState._userId}</p>
+      <p>userNickName : {userState.nickName}</p>
     </div>
   );
 }

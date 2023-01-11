@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-
-// import { useSelector, useDispatch } from 'react-redux';
-// import { signIn } from '../UserSlice';
+import { Link, useNavigate } from 'react-router-dom';
+import { removeSpace } from '../validation';
+import { useDispatch } from 'react-redux';
+import { signIn } from '../UserSlice';
 
 const StyledSignIn = styled.div`
   background-color: #ffb862;
@@ -61,16 +61,31 @@ const StyledSignIn = styled.div`
 `;
 
 export default function SignIn() {
-  const [userId, setUserId] = useState('');
-  const [userPw, setUserPw] = useState('');
+  //input 데이터 모아서 사용
+  const [inputValue, setInputValue] = useState({ userId: '', userPw: '' });
 
-  // const dispatch = useDispatch();
+  const { userId, userPw } = inputValue;
 
-  const onSubmit = () => {
-    console.log('로그인', 'id: ', userId, 'pw: ', userPw);
+  const navigate = useNavigate();
 
-    // 로그인 성공시 redux 적용예정
-    // dispatch(signIn());
+  const dispatch = useDispatch();
+
+  const onChange = (e) => {
+    setInputValue({
+      ...inputValue,
+      [e.target.name]: removeSpace(e.target.value),
+    });
+  };
+
+  const onSubmit = (e) => {
+    if (!userId || !userPw) {
+      alert('아이디나 비밀번호를 입력해주세요');
+    } else {
+      // api 응답 성공시 nickName 받을 예정
+      console.log('로그인');
+      dispatch(signIn({ _userId: userId, nickName: 'nickName', isLogin: true }));
+      navigate('/');
+    }
   };
 
   return (
@@ -82,8 +97,9 @@ export default function SignIn() {
             className="input"
             type="text"
             placeholder="아이디"
-            onChange={(e) => setUserId(e.target.value)}
+            onChange={onChange}
             value={userId}
+            name="userId"
           />
         </label>
         <label>
@@ -91,10 +107,9 @@ export default function SignIn() {
             className="input"
             type="password"
             placeholder="비밀번호"
-            onChange={(e) => {
-              setUserPw(e.target.value);
-            }}
+            onChange={onChange}
             value={userPw}
+            name="userPw"
           />
         </label>
       </div>
