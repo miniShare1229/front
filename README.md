@@ -6,7 +6,7 @@
 - react router : 페이지 처리
 - styled-components
 - redux : 상태관리 -> redux-toolkit으로 변경(보일러 플레이트 제거, store 설정 단순화를 위해) 
-- axios : API통신
+- axios : API통신 -> rtk query로 변경(캐싱 처리, 로딩 표시, 중복 요청 방지 등을 위해)
 - vite : 번들링
 
 ## 배포 툴
