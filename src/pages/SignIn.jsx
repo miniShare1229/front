@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
-import { removeSpace } from '../validation';
+import { validateId, validatePw, removeSpace } from '../validation';
 import { useDispatch } from 'react-redux';
 import { signIn } from '../UserSlice';
 
@@ -81,10 +81,12 @@ export default function SignIn() {
     if (!userId || !userPw) {
       alert('아이디나 비밀번호를 입력해주세요');
     } else {
-      // api 응답 성공시 nickName 받을 예정
-      console.log('로그인');
-      dispatch(signIn({ _userId: userId, nickName: 'nickName', isLogin: true }));
-      navigate('/');
+      if (validateId(userId) && validatePw(userPw)) {
+        // api 응답 성공시 nickName 받을 예정
+        console.log('로그인');
+        dispatch(signIn({ _userId: userId, nickName: 'nickName', isLogin: true }));
+        navigate('/');
+      }
     }
   };
 
