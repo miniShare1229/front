@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { validateId, validatePw, validateNickName, isPwSame, removeSpace } from '../validation';
 
 const StyledSignUp = styled.div`
   background-color: #39557e;
@@ -63,23 +64,41 @@ const StyledSignUp = styled.div`
 `;
 
 export default function SignUp() {
-  const [userId, setUserId] = useState('');
-  const [userNickName, setUserNickName] = useState('');
-  const [userPw, setUserPw] = useState('');
-  const [userPwChk, setUserPwChk] = useState('');
+  const [inputValue, setInputValue] = useState({
+    userId: '',
+    userNickName: '',
+    userPw: '',
+    userPwChk: '',
+  });
 
-  const onSubmit = () => {
-    console.log(
-      '회원가입',
-      'id: ',
-      userId,
-      'nick: ',
-      userNickName,
-      'pw: ',
-      userPw,
-      'pwChk: ',
-      userPwChk,
-    );
+  const { userId, userNickName, userPw, userPwChk } = inputValue;
+
+  const navigate = useNavigate();
+
+  const onChange = (e) => {
+    setInputValue({
+      ...inputValue,
+      [e.target.name]: removeSpace(e.target.value),
+    });
+  };
+
+  const onSubmit = (e) => {
+    console.log('회원가입', inputValue);
+
+    if (!userId || !userPw || !userNickName || !userPwChk) {
+      alert('모두 입력해주세요');
+    } else {
+      if (
+        isPwSame(userPw, userPwChk) &&
+        validateId(userId) &&
+        validatePw(userPw) &&
+        validateNickName(userNickName)
+      ) {
+        // api 응답 성공시 sign-in으로 페이지 이동 예정
+        alert('회원가입 완료!');
+        navigate('/sign-in');
+      }
+    }
   };
 
   return (
@@ -92,8 +111,9 @@ export default function SignUp() {
             className="input"
             type="text"
             placeholder="아이디"
-            onChange={(e) => setUserId(e.target.value)}
+            onChange={onChange}
             value={userId}
+            name="userId"
           />
         </label>
         <label>
@@ -101,8 +121,9 @@ export default function SignUp() {
             className="input"
             type="text"
             placeholder="닉네임"
-            onChange={(e) => setUserNickName(e.target.value)}
+            onChange={onChange}
             value={userNickName}
+            name="userNickName"
           />
         </label>
         <label>
@@ -110,10 +131,9 @@ export default function SignUp() {
             className="input"
             type="password"
             placeholder="비밀번호"
-            onChange={(e) => {
-              setUserPw(e.target.value);
-            }}
+            onChange={onChange}
             value={userPw}
+            name="userPw"
           />
         </label>
         <label>
@@ -121,10 +141,9 @@ export default function SignUp() {
             className="input"
             type="password"
             placeholder="비밀번호 확인"
-            onChange={(e) => {
-              setUserPwChk(e.target.value);
-            }}
+            onChange={onChange}
             value={userPwChk}
+            name="userPwChk"
           />
         </label>
       </div>
