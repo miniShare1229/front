@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
-import test from './reducer';
 import user from './userSlice';
+import { dummyApi } from './api';
 
 export const store = configureStore({
   reducer: {
-    test,
     user,
+    [dummyApi.reducerPath]: dummyApi.reducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger, dummyApi.middleware),
 });
