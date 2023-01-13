@@ -8,6 +8,7 @@ import SignUp from './pages/SignUp';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import PageLayout from './pages/PageLayout';
+import MyPage from './pages/MyPage';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="sign-up" element={<SignUp />} />
           <Route path="sign-in" element={<SignIn />} />
+          <Route path="my-page" element={<MyPage />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import styled from 'styled-components';
+import GlobalSideBar from '../components/GlobalSideBar';
 
 const StyledApp = styled.div`
   background-color: #fff9dd;
@@ -45,21 +46,22 @@ export default function PageLayout() {
         <nav>
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/">MiniShare</Link>
             </li>
             <li>
-              <Link to="/sign-up">SignUp</Link>
+              <Link to="/sign-up">회원가입</Link>
             </li>
             <li>
-              <Link to="/sign-in">SignIn</Link>
+              <Link to="/my-page">마이페이지</Link>
             </li>
             <li>
-              <Link to="/not-found">404 NotFound</Link>
+              <Link to="/sign-in">로그인</Link>
             </li>
           </ul>
         </nav>
       </StyledHeader>
       <StyledBody>
+        <GlobalSideBar></GlobalSideBar>
         <Outlet />
       </StyledBody>
       <StyledFooter>
