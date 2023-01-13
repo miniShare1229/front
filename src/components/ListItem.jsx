@@ -9,7 +9,7 @@ const StyledListItem = styled.div`
   transition: 0.4s ease;
   margin: 35px auto;
   margin-top: 0;
-  background-color: #efe5e4;
+  background-color: #fcfcfc;
 
   .item-body {
     padding: 30px;
@@ -28,22 +28,18 @@ const StyledListItem = styled.div`
 
   .item-body .item-button {
     display: block;
-    width: 20%;
-    height: 50px;
-    border-radius: 3px;
-    text-align: center;
-    background-color: #fcf0ff;
-    color: #ff8833;
+    width: 130px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #efefef;
+    color: #0f1f9c;
     text-decoration: none;
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 50px;
     margin: auto;
   }
 
   .item-body .item-button {
     transition: 0.4s ease;
-    border: none;
+    border: 2px solid rgba(17, 42, 165, 0.4);
   }
 
   .item:hover {
@@ -52,7 +48,7 @@ const StyledListItem = styled.div`
   }
 
   .item-body .item-button:hover {
-    background-color: #a53636;
+    background-color: #0f1f9c;
     color: #e6ecff;
   }
 `;

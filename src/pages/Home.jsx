@@ -1,15 +1,22 @@
 import React from 'react';
 import Lists from '../components/Lists';
+import Editor from '../components/Editor';
+
+import styled from 'styled-components';
+
+const StyledHome = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+`;
 
 function Home() {
   return (
-    <div>
-      <h2>Home</h2>
-      <p>비공개 목록</p>
-      <p>공유한 장르 목록</p>
-      <hr />
+    <StyledHome>
+      <Editor></Editor>
       <Lists></Lists>
-    </div>
+    </StyledHome>
   );
 }
 

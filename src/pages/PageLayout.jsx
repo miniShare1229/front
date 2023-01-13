@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import GlobalSideBar from '../components/GlobalSideBar';
 
 const StyledApp = styled.div`
-  background-color: #fff9dd;
   height: 100%;
   width: 100%;
   margin: auto;
@@ -13,10 +12,10 @@ const StyledApp = styled.div`
 
 const StyledBody = styled.div`
   align-items: center;
-  background-color: #fff2b6;
+  background-color: #eaeaea;
   display: flex;
   justify-content: center;
-  height: 100vh;
+  height: 100%;
   margin: auto;
   font-family: sans-serif;
   border: solid 1px green;
