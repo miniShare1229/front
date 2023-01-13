@@ -4,16 +4,17 @@ import { Link, useNavigate } from 'react-router-dom';
 import { validateId, validatePw, validateNickName, isPwSame, removeSpace } from '../validation';
 
 const StyledSignUp = styled.div`
-  background-color: #39557e;
+  background-color: #425e96;
   border-radius: 20px;
   box-sizing: border-box;
-  height: 500px;
+  height: 550px;
   padding: 20px;
-  width: 320px;
+  width: 360px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-
+  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5), 7px 7px 20px 0px rgba(0, 0, 0, 0.1),
+    4px 4px 5px 0px rgba(0, 0, 0, 0.3);
   .title {
     color: #ffffff;
     font-size: 26px;
@@ -38,15 +39,26 @@ const StyledSignUp = styled.div`
       box-sizing: border-box;
       border: none;
       color: #404040;
-      font-size: 16px;
+      font-size: 14px;
       height: 35px;
       width: 100%;
       padding: 0 0 0 10px;
     }
   }
 
+  a {
+    text-align: center;
+    text-decoration: none;
+    color: #d4d4d4;
+    font-size: 14px;
+    :hover {
+      color: #80c2fc;
+      text-decoration: underline;
+    }
+  }
+
   button {
-    background-color: #358e82;
+    background-color: #26a190;
     border-radius: 12px;
     border: none;
     box-sizing: border-box;
@@ -56,10 +68,15 @@ const StyledSignUp = styled.div`
     height: 50px;
     text-align: center;
     width: 100%;
-  }
-
-  button:active {
-    background-color: #02796f;
+    font-weight: 900;
+    box-shadow: inset 1px 1px 1px 0px rgba(255, 255, 255, 0.3);
+    :hover {
+      background-color: #56b0ff;
+      color: #ffffff;
+    }
+    :active {
+      background-color: #008489;
+    }
   }
 `;
 
@@ -103,14 +120,14 @@ export default function SignUp() {
 
   return (
     <StyledSignUp>
-      <h2 className="title"> 환영합니다! 🎉 </h2>
+      <h2 className="title">🎉 환영합니다! 🎉</h2>
       <p className="sub-title">친구와 재미를 공유하세요!</p>
       <div className="input-box">
         <label>
           <input
             className="input"
             type="text"
-            placeholder="아이디"
+            placeholder="아이디(영문, 숫자 3-10글자)"
             onChange={onChange}
             value={userId}
             name="userId"
@@ -120,7 +137,7 @@ export default function SignUp() {
           <input
             className="input"
             type="text"
-            placeholder="닉네임"
+            placeholder="닉네임(영문, 숫자, 특수문자 2-6글자)"
             onChange={onChange}
             value={userNickName}
             name="userNickName"
@@ -130,7 +147,7 @@ export default function SignUp() {
           <input
             className="input"
             type="password"
-            placeholder="비밀번호"
+            placeholder="비밀번호(영문, 숫자, 특수문자 6-12글자)"
             onChange={onChange}
             value={userPw}
             name="userPw"
@@ -140,7 +157,7 @@ export default function SignUp() {
           <input
             className="input"
             type="password"
-            placeholder="비밀번호 확인"
+            placeholder="비밀번호 확인(영문, 숫자, 특수문자 6-12글자)"
             onChange={onChange}
             value={userPwChk}
             name="userPwChk"
