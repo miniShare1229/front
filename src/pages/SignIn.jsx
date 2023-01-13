@@ -6,44 +6,58 @@ import { useDispatch } from 'react-redux';
 import { signIn } from '../UserSlice';
 
 const StyledSignIn = styled.div`
-  background-color: #ffb862;
+  background-color: #5c99e9;
   border-radius: 20px;
   box-sizing: border-box;
   height: 500px;
-  padding: 20px;
-  width: 320px;
+  padding: 40px;
+  width: 350px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5), 7px 7px 20px 0px rgba(0, 0, 0, 0.1),
+    4px 4px 5px 0px rgba(0, 0, 0, 0.3);
 
   .title {
     color: #ffffff;
     font-size: 26px;
     font-weight: 600;
     text-align: center;
+    margin-bottom: 20px;
   }
 
   .input-box {
-    height: 80px;
+    height: 90px;
+    margin-top: 30px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
     .input {
-      background-color: #303245;
+      background-color: #dedede;
       border-radius: 10px;
       box-sizing: border-box;
       border: none;
-      color: #eee;
-      font-size: 16px;
+      color: #404040;
+      font-size: 14px;
       height: 35px;
       width: 100%;
       padding: 0 0 0 10px;
     }
   }
-
+  a {
+    text-align: center;
+    margin-top: 90px;
+    text-decoration: none;
+    color: #e7e7e7;
+    font-size: 14px;
+    :hover {
+      color: #0e3558;
+      text-decoration: underline;
+    }
+  }
   button {
-    background-color: #8e53d5;
+    background-color: #1257ab;
     border-radius: 12px;
     border: none;
     box-sizing: border-box;
@@ -53,10 +67,14 @@ const StyledSignIn = styled.div`
     height: 50px;
     text-align: center;
     width: 100%;
-  }
-
-  button:active {
-    background-color: #5e00c2;
+    box-shadow: inset 1px 1px 1px 0px rgba(255, 255, 255, 0.3);
+    :hover {
+      background-color: #1228a5;
+      color: #ffffff;
+    }
+    :active {
+      background-color: #2d3c6b;
+    }
   }
 `;
 
