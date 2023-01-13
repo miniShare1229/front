@@ -1,7 +1,9 @@
 import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import GlobalSideBar from '../components/GlobalSideBar';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const StyledApp = styled.div`
   height: 100%;
@@ -15,58 +17,21 @@ const StyledBody = styled.div`
   background-color: #eaeaea;
   display: flex;
   justify-content: center;
-  height: 100%;
   margin: auto;
+  padding: 50px;
   font-family: sans-serif;
-  border: solid 1px green;
-`;
-
-const StyledHeader = styled.header`
-  ul {
-    display: flex;
-    justify-content: space-around;
-    margin: auto;
-    font-family: sans-serif;
-  }
-`;
-
-const StyledFooter = styled.footer`
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  margin: auto;
+  min-height: 800px;
 `;
 
 export default function PageLayout() {
   return (
     <StyledApp>
-      <StyledHeader>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">MiniShare</Link>
-            </li>
-            <li>
-              <Link to="/sign-up">회원가입</Link>
-            </li>
-            <li>
-              <Link to="/my-page">마이페이지</Link>
-            </li>
-            <li>
-              <Link to="/sign-in">로그인</Link>
-            </li>
-          </ul>
-        </nav>
-      </StyledHeader>
+      <Header />
       <StyledBody>
         <GlobalSideBar></GlobalSideBar>
         <Outlet />
       </StyledBody>
-      <StyledFooter>
-        <p>이 미니 프로젝트는 원하는 친구와 관련 게시물을 공유하는 컨텐츠입니다</p>
-        <p>기획, 프론트: WYunH 백엔드: Polarvear</p>
-      </StyledFooter>
+      <Footer />
     </StyledApp>
   );
 }

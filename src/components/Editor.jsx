@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledEditor = styled.div`
-  margin: 30px auto;
+  margin: 0 auto;
   background-color: #d7e8ff;
   border-radius: 5px;
   margin-bottom: 20px;

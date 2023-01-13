@@ -9,6 +9,7 @@ const StyledHome = styled.div`
   flex-direction: column;
   height: 100%;
   width: 100%;
+  margin-top: 60px;
 `;
 
 function Home() {
