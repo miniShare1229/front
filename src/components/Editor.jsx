@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { validateContent, validateTitle } from '../validation';
 
 const StyledEditor = styled.div`
   margin: 0 auto;
@@ -22,6 +23,14 @@ const StyledEditor = styled.div`
     border: none;
     border-radius: 5px;
     background-color: rgba(247, 255, 255, 0.6);
+  }
+
+  select {
+    align-self: flex-start;
+    margin-bottom: 10px;
+    border: none;
+    background-color: rgba(247, 255, 255, 0.6);
+    font-size: 14px;
   }
 
   .text-area {
@@ -58,11 +67,56 @@ const StyledEditor = styled.div`
 `;
 
 function Editor() {
+  const icons = [
+    { value: '0', text: '정말 안좋아요 🙁' },
+    { value: '1', text: '별로에요 🫤' },
+    { value: '2', text: '보통이에요 😶' },
+    { value: '3', text: '좋아요 🙂' },
+    { value: '4', text: '최고에요 😀' },
+  ];
+
+  const [inputValue, setInputValue] = useState({ title: '', content: '', icon: '2' });
+
+  const { title, content, icon } = inputValue;
+
+  const onChange = (e) => {
+    setInputValue({
+      ...inputValue,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const onSubmit = () => {
+    if (validateTitle(title) && validateContent(content)) {
+      // api통신 처리 예정
+      console.log(inputValue);
+    }
+  };
   return (
     <StyledEditor>
-      <input className="input" type="text" placeholder="제목" />
-      <textarea className="text-area" placeholder="내용"></textarea>
-      <button>등록</button>
+      <input
+        className="input"
+        type="text"
+        placeholder="제목"
+        name="title"
+        value={title}
+        onChange={onChange}
+      />
+      <select value={icon} onChange={onChange} name="icon">
+        {icons.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.text}
+          </option>
+        ))}
+      </select>
+      <textarea
+        className="text-area"
+        placeholder="내용"
+        name="content"
+        value={content}
+        onChange={onChange}
+      ></textarea>
+      <button onClick={onSubmit}>등록</button>
     </StyledEditor>
   );
 }
