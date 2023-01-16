@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 const StyledGlobalSideBar = styled.div`
   background-color: #f9f9f9;
   position: fixed;
@@ -14,14 +15,14 @@ const StyledGlobalSideBar = styled.div`
   left: 0;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
 
-  button {
-    width: 130px;
-    height: 40px;
+  a {
     color: #fff;
     border-radius: 5px;
     padding: 10px 25px;
     background: transparent;
+    font-size: 14px;
     cursor: pointer;
+    text-decoration: none;
     transition: all 0.3s ease;
     position: relative;
     display: inline-block;
@@ -40,11 +41,17 @@ const StyledGlobalSideBar = styled.div`
 `;
 
 function GlobalSideBar() {
+  const userId = useSelector((state) => state.user._userId);
+
   return (
-    <StyledGlobalSideBar>
-      <button>개인 글</button>
-      <button>공유 글</button>
-    </StyledGlobalSideBar>
+    <>
+      {userId ? (
+        <StyledGlobalSideBar>
+          <Link to={`/${userId}/privite`}>개인 글</Link>
+          <Link to={`/${userId}/shared`}>공유 글</Link>
+        </StyledGlobalSideBar>
+      ) : null}
+    </>
   );
 }
 

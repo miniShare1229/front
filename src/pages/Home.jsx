@@ -3,6 +3,7 @@ import Lists from '../components/Lists';
 import Editor from '../components/Editor';
 
 import styled from 'styled-components';
+import { Route, Routes } from 'react-router-dom';
 
 const StyledHome = styled.div`
   display: flex;
@@ -16,7 +17,9 @@ function Home() {
   return (
     <StyledHome>
       <Editor></Editor>
-      <Lists></Lists>
+      <Routes>
+        <Route path=":userId" element={<Lists />}></Route>
+      </Routes>
     </StyledHome>
   );
 }
