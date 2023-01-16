@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const StyledMyPage = styled.div`
   margin: 0 auto;
@@ -105,6 +107,14 @@ const StyledMyPage = styled.div`
 `;
 
 function MyPage() {
+  const isLogin = useSelector((state) => state.user.isLogin);
+  const navigate = useNavigate();
+
+  if (!isLogin) {
+    alert('로그인을 해주세요!');
+    navigate('/sign-in');
+  }
+
   return (
     <StyledMyPage>
       <div className="info">

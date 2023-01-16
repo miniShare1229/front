@@ -17,11 +17,13 @@ const userSlice = createSlice({
       state.isLogin = action.payload.isLogin;
     },
     signOut(state) {
-      state = initialState;
+      state._userId = '';
+      state.nickName = '';
+      state.isLogin = false;
     },
   },
 });
 
-export const { signIn } = userSlice.actions;
+export const { signIn, signOut } = userSlice.actions;
 
 export default userSlice.reducer;

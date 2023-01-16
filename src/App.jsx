@@ -1,6 +1,5 @@
-import * as React from 'react';
+import React from 'react';
 import { Reset } from 'styled-reset';
-
 import { Routes, Route } from 'react-router-dom';
 
 import SignIn from './pages/SignIn';

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { validateContent, validateTitle } from '../validation';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const StyledEditor = styled.div`
   margin: 0 auto;
@@ -79,6 +81,10 @@ function Editor() {
 
   const { title, content, icon } = inputValue;
 
+  const navigate = useNavigate();
+
+  const isLogin = useSelector((state) => state.user.isLogin);
+
   const onChange = (e) => {
     setInputValue({
       ...inputValue,
@@ -87,9 +93,14 @@ function Editor() {
   };
 
   const onSubmit = () => {
-    if (validateTitle(title) && validateContent(content)) {
-      // api통신 처리 예정
-      console.log(inputValue);
+    if (isLogin) {
+      if (validateTitle(title) && validateContent(content)) {
+        // api통신 처리 예정
+        console.log(inputValue);
+      }
+    } else {
+      alert('로그인을 해주세요!');
+      navigate('/sign-in');
     }
   };
   return (

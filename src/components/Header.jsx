@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { signOut } from '../userSlice';
 
 const StyledHeader = styled.header`
   height: 60px;
@@ -46,24 +48,36 @@ const StyledHeader = styled.header`
     }
   }
 `;
+
 function Header() {
+  const isLogin = useSelector((state) => state.user.isLogin);
+  const dispatch = useDispatch();
+
   return (
     <StyledHeader>
       <nav>
         <Link className="logo" to="/">
           MiniShare
         </Link>
-        <ul>
-          <li>
-            <Link to="/sign-up">회원가입</Link>
-          </li>
-          <li>
-            <Link to="/my-page">마이페이지</Link>
-          </li>
-          <li>
-            <Link to="/sign-in">로그인</Link>
-          </li>
-        </ul>
+        {isLogin ? (
+          <ul>
+            <li>
+              <Link to="/my-page">마이페이지</Link>
+            </li>
+            <li>
+              <button onClick={() => dispatch(signOut())}>로그아웃</button>
+            </li>
+          </ul>
+        ) : (
+          <ul>
+            <li>
+              <Link to="/sign-up">회원가입</Link>
+            </li>
+            <li>
+              <Link to="/sign-in">로그인</Link>
+            </li>
+          </ul>
+        )}
       </nav>
     </StyledHeader>
   );
