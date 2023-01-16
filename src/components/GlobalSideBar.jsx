@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 const StyledGlobalSideBar = styled.div`
   background-color: #f9f9f9;
@@ -15,7 +15,7 @@ const StyledGlobalSideBar = styled.div`
   left: 0;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
 
-  a {
+  button {
     color: #fff;
     border-radius: 5px;
     padding: 10px 25px;
@@ -42,13 +42,24 @@ const StyledGlobalSideBar = styled.div`
 
 function GlobalSideBar() {
   const userId = useSelector((state) => state.user._userId);
+  const navigate = useNavigate();
+  // listId 임시 전달
+  const moveToLists = (e) => {
+    e.target.name === 'privite'
+      ? navigate(`/${userId}/privite`, { state: { listId: [0, 1, 2, 3] } })
+      : navigate(`/${userId}/shared`, { state: { listId: [4, 5] } });
+  };
 
   return (
     <>
       {userId ? (
         <StyledGlobalSideBar>
-          <Link to={`/${userId}/privite`}>개인 글</Link>
-          <Link to={`/${userId}/shared`}>공유 글</Link>
+          <button onClick={moveToLists} name="privite">
+            개인 글
+          </button>
+          <button onClick={moveToLists} name="shared">
+            공유 글
+          </button>
         </StyledGlobalSideBar>
       ) : null}
     </>

@@ -1,7 +1,7 @@
 import React from 'react';
 import ListItem from './ListItem';
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const StyledLists = styled.div`
   max-width: 1000px;
@@ -9,9 +9,10 @@ const StyledLists = styled.div`
   padding: 50px 20px;
 `;
 
-const listId = [0, 1, 2, 3, 4, 5, 6, 7];
-
 function Lists() {
+  const location = useLocation();
+  const listId = location.state.listId;
+
   return (
     <StyledLists className="container">
       {listId.map((item) => (
