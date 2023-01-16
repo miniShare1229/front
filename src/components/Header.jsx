@@ -40,10 +40,16 @@ const StyledHeader = styled.header`
       font-weight: 900;
     }
 
-    a {
+    a,
+    button {
+      font-size: 16px;
       text-decoration: none;
+      border: none;
+      background-color: #a9c6ea;
+      font-weight: 900;
       :hover {
         color: #e0f4ff;
+        cursor: pointer;
       }
     }
   }
