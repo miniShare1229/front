@@ -43,11 +43,9 @@ const StyledGlobalSideBar = styled.div`
 function GlobalSideBar() {
   const userId = useSelector((state) => state.user._userId);
   const navigate = useNavigate();
-  // listId 임시 전달
+
   const moveToLists = (e) => {
-    e.target.name === 'privite'
-      ? navigate(`/${userId}/privite`, { state: { listId: [0, 1, 2, 3] } })
-      : navigate(`/${userId}/shared`, { state: { listId: [4, 5] } });
+    e.target.name === 'privite' ? navigate(`lists/privite`) : navigate(`lists/shared`);
   };
 
   return (

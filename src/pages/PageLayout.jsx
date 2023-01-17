@@ -28,8 +28,8 @@ export default function PageLayout() {
     <StyledApp>
       <Header />
       <StyledBody>
-        <GlobalSideBar></GlobalSideBar>
         <Outlet />
+        <GlobalSideBar></GlobalSideBar>
       </StyledBody>
       <Footer />
     </StyledApp>

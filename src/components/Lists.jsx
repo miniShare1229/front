@@ -11,8 +11,16 @@ const StyledLists = styled.div`
 
 function Lists() {
   const location = useLocation();
-  const listId = location.state.listId;
+  const path = location.pathname;
 
+  // 임시 적용
+  let listId = [];
+
+  if (path === 'lists/privite') {
+    listId = [1, 2, 3, 4, 5];
+  } else {
+    listId = [6, 7];
+  }
   return (
     <StyledLists className="container">
       {listId.map((item) => (

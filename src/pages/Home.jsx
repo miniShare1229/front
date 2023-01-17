@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Lists from '../components/Lists';
 import Editor from '../components/Editor';
-
+import NotFound from '../pages/NotFound';
 import styled from 'styled-components';
-import { Route, Routes } from 'react-router-dom';
+import { Outlet, Route, Routes } from 'react-router-dom';
 
 const StyledHome = styled.div`
   display: flex;
@@ -14,12 +14,20 @@ const StyledHome = styled.div`
 `;
 
 function Home() {
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetch(`/test`);
+
+      console.log(JSON.stringify(data));
+    };
+
+    fetchData().catch(console.error);
+  }, []);
+
   return (
     <StyledHome>
       <Editor></Editor>
-      <Routes>
-        <Route path=":userId" element={<Lists />}></Route>
-      </Routes>
+      <Outlet />
     </StyledHome>
   );
 }

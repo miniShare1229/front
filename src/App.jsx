@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import PageLayout from './pages/PageLayout';
 import MyPage from './pages/MyPage';
+import Lists from './components/Lists';
 
 function App() {
   return (
@@ -16,7 +17,10 @@ function App() {
       <Routes>
         <Route path="/" element={<PageLayout />}>
           <Route index element={<Home />} />
-          <Route path=":userId/*" element={<Home />} />
+          <Route path="lists" element={<Home />}>
+            <Route path="privite" element={<Lists />} />
+            <Route path="shared" element={<Lists />} />
+          </Route>
           <Route path="sign-up" element={<SignUp />} />
           <Route path="sign-in" element={<SignIn />} />
           <Route path="my-page" element={<MyPage />} />
