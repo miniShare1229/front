@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+// 편의성 위해 상태 임시 적용
 const initialState = {
-  isLogin: false,
-  _userId: '',
-  nickName: '',
+  isLogin: true,
+  _userId: 'test',
+  nickName: 'test',
 };
 
 const userSlice = createSlice({

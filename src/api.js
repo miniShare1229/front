@@ -14,7 +14,8 @@ export const dummyApi = createApi({
 // 서버에 post
 export const signUpApi = createApi({
   reducerPath: 'signupApi',
-  baseQuery: fetchBaseQuery({ baseUrl: '/' }),
+  // json server위한 baseUrl 임시 설정
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000' }),
   endpoints: (build) => ({
     signUp: build.mutation({
       query: (payload) => ({
@@ -26,7 +27,6 @@ export const signUpApi = createApi({
     }),
   }),
 });
-// http://localhost:3000
 
 export const { useGetDummyQuery } = dummyApi;
 export const { useSignUpMutation } = signUpApi;
