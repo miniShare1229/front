@@ -102,7 +102,7 @@ export default function SignIn() {
       if (validateId(userId) && validatePw(userPw)) {
         // api 응답 성공시 nickName 받을 예정
         console.log('로그인');
-        dispatch(signIn({ _userId: userId, nickName: 'nickName', isLogin: true }));
+        dispatch(signIn({ _userId: userId || 'userId', nickName: 'nickName', isLogin: true }));
         navigate('/');
       }
     }

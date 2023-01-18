@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 import { validateId, validatePw, validateNickName, isPwSame, removeSpace } from '../validation';
+import { useSignUpMutation } from '../api';
 
 const StyledSignUp = styled.div`
   background-color: #425e96;
@@ -90,6 +91,8 @@ export default function SignUp() {
 
   const { userId, userNickName, userPw, userPwChk } = inputValue;
 
+  const [signupApi, response] = useSignUpMutation();
+
   const navigate = useNavigate();
 
   const onChange = (e) => {
@@ -111,9 +114,19 @@ export default function SignUp() {
         validatePw(userPw) &&
         validateNickName(userNickName)
       ) {
-        // api 응답 성공시 sign-in으로 페이지 이동 예정
-        alert('회원가입 완료!');
-        navigate('/sign-in');
+        e.preventDefault();
+
+        // 회원가입 post 요청
+        signupApi({ id: userId, pwd: userPw, nickname: userNickName })
+          .unwrap()
+          .then((response) => {
+            console.log(response);
+
+            // api 응답 성공시 sign-in으로 페이지 이동 예정
+            alert('회원가입 완료!');
+            navigate('/sign-in');
+          })
+          .catch((response) => console.error(response));
       }
     }
   };

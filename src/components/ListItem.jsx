@@ -27,14 +27,13 @@ const StyledListItem = styled.div`
   }
 
   .item-body .item-button {
-    display: block;
-    width: 130px;
+    display: inline-block;
+    width: 60px;
     height: 40px;
     border-radius: 5px;
     background-color: #efefef;
     color: #0f1f9c;
     text-decoration: none;
-    margin: auto;
   }
 
   .item-body .item-button {
@@ -56,6 +55,12 @@ const StyledListItem = styled.div`
 const ListItem = ({ listId }) => {
   const { data, error, isLoading } = useGetDummyQuery(listId);
 
+  const onClick = (e) => {
+    const buttonName = e.target.name;
+    // 실데이터 받으면 수정/삭제 적용예정
+    console.log(buttonName);
+  };
+
   if (error) {
     return <div>에러 😭 </div>;
   }
@@ -72,7 +77,12 @@ const ListItem = ({ listId }) => {
             <h3>글 id : {data[listId].id}</h3>
             <p>시간: {new Date().getTime()}</p>
             <p>{data[listId].body}</p>
-            <button className="item-button">더보기</button>
+            <button className="item-button" name="edit" onClick={onClick}>
+              수정
+            </button>
+            <button className="item-button" name="delete" onClick={onClick}>
+              삭제
+            </button>
           </div>
         </StyledListItem>
       ) : null}
