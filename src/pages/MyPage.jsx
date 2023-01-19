@@ -71,6 +71,9 @@ function MyPage() {
     navigate('/sign-in');
   }
 
+  // 임시 데이터
+  const lists = { share: ['암거나', '취미'], shared: ['노래', '일기', '모름'] };
+
   return (
     <StyledMyPage>
       <div className="info">
@@ -87,7 +90,7 @@ function MyPage() {
           <InvitationMessage />
         </ul>
       </div>
-      <SharedLists className="lists" />
+      <SharedLists className="lists" lists={lists} />
     </StyledMyPage>
   );
 }
