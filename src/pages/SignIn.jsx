@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { validateId, validatePw, removeSpace } from '../validation';
 import { useDispatch } from 'react-redux';
 import { signIn } from '../UserSlice';
-import { useSignInMutation } from '../api';
+import { useSignInPostMutation } from '../api';
 const StyledSignIn = styled.div`
   background-color: #5c99e9;
   border-radius: 20px;
@@ -79,7 +79,7 @@ const StyledSignIn = styled.div`
 `;
 
 export default function SignIn() {
-  const [signIn, response] = useSignInMutation();
+  const [signInPost, response] = useSignInPostMutation();
 
   //input 데이터 모아서 사용
   const [inputValue, setInputValue] = useState({ userId: '', userPw: '' });
@@ -105,7 +105,7 @@ export default function SignIn() {
         // api 응답 성공시 nickName 받을 예정
 
         // 로그인 post 요청
-        signIn({ id: userId, pwd: userPw })
+        signInPost({ id: userId, pwd: userPw })
           .unwrap()
           .then((response) => {
             console.log(response);

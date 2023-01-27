@@ -25,7 +25,7 @@ export const signUpApi = createApi({
       }),
       invalidatesTags: ['Post'],
     }),
-    signIn: build.mutation({
+    signInPost: build.mutation({
       query: (payload) => ({
         url: '/login',
         method: 'POST',
@@ -45,4 +45,4 @@ export const signUpApi = createApi({
 });
 
 export const { useGetDummyQuery } = dummyApi;
-export const { useSignUpMutation, useSignInMutation, useTestPostMutation } = signUpApi;
+export const { useSignUpMutation, useSignInPostMutation, useTestPostMutation } = signUpApi;
