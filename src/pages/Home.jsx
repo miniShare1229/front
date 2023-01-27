@@ -12,15 +12,6 @@ const StyledHome = styled.div`
 `;
 
 function Home() {
-  // 백 api 요청, 응답 테스트용
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const data = await fetch(`/test`);
-  //     console.log(JSON.stringify(data));
-  //   };
-  //   fetchData().catch(console.error);
-  // }, []);
-
   return (
     <StyledHome>
       <Editor></Editor>

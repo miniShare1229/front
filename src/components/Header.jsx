@@ -67,10 +67,6 @@ function Header() {
       .unwrap()
       .then((response) => {
         console.log(response);
-
-        // api 응답 성공시 sign-in으로 페이지 이동 예정
-        alert('회원가입 완료!');
-        navigate('/sign-in');
       })
       .catch((response) => console.error(response));
   };
