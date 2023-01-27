@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { signOut } from '../userSlice';
+import { useTestPostMutation } from '../api';
 
 const StyledHeader = styled.header`
   height: 60px;
@@ -59,6 +60,21 @@ function Header() {
   const isLogin = useSelector((state) => state.user.isLogin);
   const dispatch = useDispatch();
 
+  const [testPost, response] = useTestPostMutation();
+
+  const onSubmit = (e) => {
+    testPost({ id: 'test', pwd: '1111' })
+      .unwrap()
+      .then((response) => {
+        console.log(response);
+
+        // api 응답 성공시 sign-in으로 페이지 이동 예정
+        alert('회원가입 완료!');
+        navigate('/sign-in');
+      })
+      .catch((response) => console.error(response));
+  };
+
   return (
     <StyledHeader>
       <nav>
@@ -85,6 +101,8 @@ function Header() {
           </ul>
         )}
       </nav>
+      {/* test post api */}
+      <button onClick={onSubmit}>Post /Test</button>
     </StyledHeader>
   );
 }

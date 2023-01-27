@@ -19,6 +19,22 @@ export const signUpApi = createApi({
   endpoints: (build) => ({
     signUp: build.mutation({
       query: (payload) => ({
+        url: '/register',
+        method: 'POST',
+        body: payload,
+      }),
+      invalidatesTags: ['Post'],
+    }),
+    signIn: build.mutation({
+      query: (payload) => ({
+        url: '/login',
+        method: 'POST',
+        body: payload,
+      }),
+      invalidatesTags: ['Post'],
+    }),
+    testPost: build.mutation({
+      query: (payload) => ({
         url: '/test',
         method: 'POST',
         body: payload,
@@ -29,4 +45,4 @@ export const signUpApi = createApi({
 });
 
 export const { useGetDummyQuery } = dummyApi;
-export const { useSignUpMutation } = signUpApi;
+export const { useSignUpMutation, useSignInMutation, useTestPostMutation } = signUpApi;
