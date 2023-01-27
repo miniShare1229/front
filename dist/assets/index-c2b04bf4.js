@@ -505,7 +505,7 @@ table {
       }
     }
   }
-`;function Bx(){const e=Hi(o=>o.user.isLogin),t=_c(),[n,r]=Ax();return de(Wx,{children:[de("nav",{children:[L(zn,{className:"logo",to:"/",children:"MiniShare"}),e?de("ul",{children:[L("li",{children:L(zn,{to:"/my-page",children:"마이페이지"})}),L("li",{children:L("button",{onClick:()=>t(qx()),children:"로그아웃"})})]}):de("ul",{children:[L("li",{children:L(zn,{to:"/sign-up",children:"회원가입"})}),L("li",{children:L(zn,{to:"/sign-in",children:"로그인"})})]})]}),L("button",{onClick:o=>{n({id:"test",pwd:"1111"}).unwrap().then(u=>{console.log(u),alert("회원가입 완료!"),navigate("/sign-in")}).catch(u=>console.error(u))},children:"Post /Test"})]})}const Hx=Ge.footer`
+`;function Bx(){const e=Hi(o=>o.user.isLogin),t=_c(),[n,r]=Ax();return de(Wx,{children:[de("nav",{children:[L(zn,{className:"logo",to:"/",children:"MiniShare"}),e?de("ul",{children:[L("li",{children:L(zn,{to:"/my-page",children:"마이페이지"})}),L("li",{children:L("button",{onClick:()=>t(qx()),children:"로그아웃"})})]}):de("ul",{children:[L("li",{children:L(zn,{to:"/sign-up",children:"회원가입"})}),L("li",{children:L(zn,{to:"/sign-in",children:"로그인"})})]})]}),L("button",{onClick:o=>{n({id:"test",pwd:"1111"}).unwrap().then(u=>{console.log(u)}).catch(u=>console.error(u))},children:"Post /Test"})]})}const Hx=Ge.footer`
   align-items: center;
   background-color: #f4f8ff;
   display: flex;
