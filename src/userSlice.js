@@ -1,29 +1,56 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { asyncSignOut, asyncSignIn } from './api';
 
 const initialState = {
   isLogin: false,
-  _userId: '',
-  nickName: '',
+  loading: false,
+  userInfo: {},
+  error: null,
+  success: false,
 };
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    signIn(state, action) {
-      // 로그인 api에 맞춰 적용예정
-      state._userId = action.payload._userId;
-      state.nickName = action.payload.nickName;
-      state.isLogin = action.payload.isLogin;
+    setSignIn: (state, payload) => {
+      state.userInfo = payload;
     },
-    signOut(state) {
-      state._userId = '';
-      state.nickName = '';
+    setSignOut(state) {
+      state = initialState;
+    },
+  },
+  extraReducers: {
+    [asyncSignOut.pending]: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    [asyncSignOut.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.success = true;
       state.isLogin = false;
+    },
+    [asyncSignOut.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.error = payload;
+    },
+    [asyncSignIn.pending]: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    [asyncSignIn.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.success = true;
+      state.isLogin = true;
+      state.userInfo = payload;
+    },
+    [asyncSignIn.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.error = payload;
     },
   },
 });
 
-export const { signIn, signOut } = userSlice.actions;
+export const { setSignIn, setSignOut } = userSlice.actions;
 
 export default userSlice.reducer;

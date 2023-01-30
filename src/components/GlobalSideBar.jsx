@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+
 const StyledGlobalSideBar = styled.div`
   background-color: #f9f9f9;
   position: fixed;
@@ -41,7 +42,7 @@ const StyledGlobalSideBar = styled.div`
 `;
 
 function GlobalSideBar() {
-  const userId = useSelector((state) => state.user._userId);
+  const isLogin = useSelector((state) => state.user.isLogin);
   const navigate = useNavigate();
 
   const moveToLists = (e) => {
@@ -50,7 +51,7 @@ function GlobalSideBar() {
 
   return (
     <>
-      {userId ? (
+      {isLogin ? (
         <StyledGlobalSideBar>
           <button onClick={moveToLists} name="privite">
             개인 글

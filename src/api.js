@@ -1,4 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 // 임시 데이터 get
 export const dummyApi = createApi({
@@ -11,31 +13,13 @@ export const dummyApi = createApi({
   }),
 });
 
-// 서버에 post
-export const signUpApi = createApi({
-  reducerPath: 'signupApi',
-  // json server위한 baseUrl 임시 설정
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000' }),
+export const api = createApi({
+  reducerPath: 'api',
+  baseQuery: fetchBaseQuery({ baseUrl: '/' }),
   endpoints: (build) => ({
-    signUp: build.mutation({
+    signUpPost: build.mutation({
       query: (payload) => ({
-        url: '/register',
-        method: 'POST',
-        body: payload,
-      }),
-      invalidatesTags: ['Post'],
-    }),
-    signInPost: build.mutation({
-      query: (payload) => ({
-        url: '/login',
-        method: 'POST',
-        body: payload,
-      }),
-      invalidatesTags: ['Post'],
-    }),
-    testPost: build.mutation({
-      query: (payload) => ({
-        url: '/test',
+        url: 'register',
         method: 'POST',
         body: payload,
       }),
@@ -44,5 +28,34 @@ export const signUpApi = createApi({
   }),
 });
 
+export const asyncSignOut = createAsyncThunk('user/signout', async (data, { rejectWithValue }) => {
+  try {
+    const res = await axios.get(`/delete`);
+
+    console.log('delete', data, res.data);
+    return res.data;
+  } catch (error) {
+    if (error.response && error.response.data.message) {
+      return rejectWithValue(error.response.data.message);
+    } else {
+      return rejectWithValue(error.message);
+    }
+  }
+});
+
+export const asyncSignIn = createAsyncThunk('user/signin', async (data, { rejectWithValue }) => {
+  try {
+    const res = await axios.post(`/login`, data);
+    console.log('login', data, res.data);
+    return res.data;
+  } catch (error) {
+    if (error.response && error.response.data.message) {
+      return rejectWithValue(error.response.data.message);
+    } else {
+      return rejectWithValue(error.message);
+    }
+  }
+});
+
 export const { useGetDummyQuery } = dummyApi;
-export const { useSignUpMutation, useSignInPostMutation, useTestPostMutation } = signUpApi;
+export const { useSignUpPostMutation } = api;

@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { signOut } from '../userSlice';
-import { useTestPostMutation } from '../api';
+import { asyncSignOut } from '../api';
 
 const StyledHeader = styled.header`
   height: 60px;
@@ -60,15 +59,8 @@ function Header() {
   const isLogin = useSelector((state) => state.user.isLogin);
   const dispatch = useDispatch();
 
-  const [testPost, response] = useTestPostMutation();
-
   const onSubmit = (e) => {
-    testPost({ id: 'test', pwd: '1111' })
-      .unwrap()
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((response) => console.error(response));
+    dispatch(asyncSignOut());
   };
 
   return (
@@ -83,7 +75,7 @@ function Header() {
               <Link to="/my-page">마이페이지</Link>
             </li>
             <li>
-              <button onClick={() => dispatch(signOut())}>로그아웃</button>
+              <button onClick={onSubmit}>로그아웃</button>
             </li>
           </ul>
         ) : (
@@ -97,8 +89,6 @@ function Header() {
           </ul>
         )}
       </nav>
-      {/* test post api */}
-      <button onClick={onSubmit}>Post /Test</button>
     </StyledHeader>
   );
 }

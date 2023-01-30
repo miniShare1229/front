@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 import { validateId, validatePw, removeSpace } from '../validation';
-import { useDispatch } from 'react-redux';
-import { signIn } from '../UserSlice';
-import { useSignInPostMutation } from '../api';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSignIn } from '../UserSlice';
+import { asyncSignIn } from '../api';
+
 const StyledSignIn = styled.div`
   background-color: #5c99e9;
   border-radius: 20px;
@@ -79,16 +80,11 @@ const StyledSignIn = styled.div`
 `;
 
 export default function SignIn() {
-  const [signInPost, response] = useSignInPostMutation();
-
+  const dispatch = useDispatch();
   //input 데이터 모아서 사용
   const [inputValue, setInputValue] = useState({ userId: '', userPw: '' });
 
   const { userId, userPw } = inputValue;
-
-  const navigate = useNavigate();
-
-  const dispatch = useDispatch();
 
   const onChange = (e) => {
     setInputValue({
@@ -103,18 +99,7 @@ export default function SignIn() {
     } else {
       if (validateId(userId) && validatePw(userPw)) {
         // api 응답 성공시 nickName 받을 예정
-
-        // 로그인 post 요청
-        signInPost({ id: userId, pwd: userPw })
-          .unwrap()
-          .then((response) => {
-            console.log(response);
-
-            // alert('로그인 성공!');
-            dispatch(signIn({ _userId: userId || 'userId', nickName: 'nickName', isLogin: true }));
-            navigate('/');
-          })
-          .catch((response) => console.error(response));
+        dispatch(asyncSignIn({ id: userId, pwd: userPw }));
       }
     }
   };
