@@ -91,7 +91,7 @@ export default function SignUp() {
 
   const { userId, userNickName, userPw, userPwChk } = inputValue;
 
-  const [signUp, response] = useSignUpPostMutation();
+  const [signUp, response] = useSignUpMutation();
 
   const navigate = useNavigate();
 
