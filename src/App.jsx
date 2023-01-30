@@ -18,7 +18,7 @@ function App() {
         <Route path="/" element={<PageLayout />}>
           <Route index element={<Home />} />
           <Route path="lists" element={<Home />}>
-            <Route path="privite" element={<Lists />} />
+            <Route path="private" element={<Lists />} />
             <Route path="shared" element={<Lists />} />
           </Route>
           <Route path="sign-up" element={<SignUp />} />

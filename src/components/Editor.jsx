@@ -99,7 +99,7 @@ function Editor() {
     if (isLogin) {
       if (validateTitle(title) && validateContent(content)) {
         console.log(inputValue);
-        addPost({ postState: 'privite', inputValue })
+        addPost({ postState: 'private', inputValue })
           .unwrap()
           .then((response) => {
             console.log('res: ', response);

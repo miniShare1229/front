@@ -46,14 +46,14 @@ function GlobalSideBar() {
   const navigate = useNavigate();
 
   const moveToLists = (e) => {
-    e.target.name === 'privite' ? navigate(`lists/privite`) : navigate(`lists/shared`);
+    e.target.name === 'private' ? navigate(`lists/private`) : navigate(`lists/shared`);
   };
 
   return (
     <>
       {isLogin ? (
         <StyledGlobalSideBar>
-          <button onClick={moveToLists} name="privite">
+          <button onClick={moveToLists} name="private">
             개인 글
           </button>
           <button onClick={moveToLists} name="shared">

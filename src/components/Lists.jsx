@@ -16,7 +16,7 @@ function Lists() {
   // 임시 적용
   let listId = [];
 
-  if (path === 'lists/privite') {
+  if (path === 'lists/private') {
     listId = [1, 2, 3, 4, 5];
   } else {
     listId = [6, 7];
