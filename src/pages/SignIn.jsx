@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 import { validateId, validatePw, removeSpace } from '../validation';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSignIn } from '../UserSlice';
 import { asyncSignIn } from '../api';
 
 const StyledSignIn = styled.div`
@@ -83,7 +82,7 @@ export default function SignIn() {
   const dispatch = useDispatch();
   //input 데이터 모아서 사용
   const [inputValue, setInputValue] = useState({ userId: '', userPw: '' });
-
+  const navigate = useNavigate();
   const { userId, userPw } = inputValue;
 
   const onChange = (e) => {
@@ -93,13 +92,23 @@ export default function SignIn() {
     });
   };
 
+  const signIn = async ({ id: userId, pwd: userPw }) => {
+    const res = await dispatch(asyncSignIn({ id: userId, pwd: userPw })).unwrap();
+    if (res.code === 200) {
+      console.log('로그인 성공');
+      navigate('/');
+    } else {
+      console.log('로그인 실패');
+    }
+  };
+
   const onSubmit = (e) => {
     if (!userId || !userPw) {
       alert('아이디나 비밀번호를 입력해주세요');
     } else {
       if (validateId(userId) && validatePw(userPw)) {
         // api 응답 성공시 nickName 받을 예정
-        dispatch(asyncSignIn({ id: userId, pwd: userPw }));
+        signIn({ id: userId, pwd: userPw });
       }
     }
   };

@@ -17,13 +17,22 @@ export const api = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({ baseUrl: '/' }),
   endpoints: (build) => ({
-    signUpPost: build.mutation({
+    signUp: build.mutation({
       query: (payload) => ({
         url: 'register',
         method: 'POST',
         body: payload,
       }),
-      invalidatesTags: ['Post'],
+      invalidatesTags: ['User'],
+    }),
+    addPost: build.mutation({
+      query: ({ postState, inputValue }) => ({
+        // private  / shared 구분 필요
+        url: `${postState}Submit`,
+        method: 'POST',
+        body: inputValue,
+      }),
+      invalidatesTags: ['Posts'],
     }),
   }),
 });
@@ -58,4 +67,4 @@ export const asyncSignIn = createAsyncThunk('user/signin', async (data, { reject
 });
 
 export const { useGetDummyQuery } = dummyApi;
-export const { useSignUpPostMutation } = api;
+export const { useSignUpMutation, useAddPostMutation } = api;

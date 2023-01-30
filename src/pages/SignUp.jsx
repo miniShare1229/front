@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 import { validateId, validatePw, validateNickName, isPwSame, removeSpace } from '../validation';
-import { useSignUpPostMutation } from '../api';
+import { useSignUpMutation } from '../api';
 
 const StyledSignUp = styled.div`
   background-color: #425e96;
@@ -91,7 +91,7 @@ export default function SignUp() {
 
   const { userId, userNickName, userPw, userPwChk } = inputValue;
 
-  const [signUpPost, response] = useSignUpPostMutation();
+  const [signUp, response] = useSignUpPostMutation();
 
   const navigate = useNavigate();
 
@@ -117,7 +117,7 @@ export default function SignUp() {
         e.preventDefault();
 
         // 회원가입 post 요청
-        signUpPost({ id: userId, pwd: userPw, nickname: userNickName })
+        signUp({ id: userId, pwd: userPw, nickname: userNickName })
           .unwrap()
           .then((response) => {
             console.log(response);

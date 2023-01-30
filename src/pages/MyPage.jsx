@@ -63,9 +63,8 @@ const StyledMyPage = styled.div`
 `;
 
 function MyPage() {
-  let { isLogin } = useSelector((state) => state.user);
+  let { isLogin, nickName } = useSelector((state) => state.user);
   const navigate = useNavigate();
-  console.log(isLogin);
   if (!isLogin) {
     alert('로그인을 해주세요!');
     navigate('/sign-in');
@@ -78,7 +77,7 @@ function MyPage() {
     <StyledMyPage>
       <div className="info">
         <h2>어서오세요! 😀</h2>
-        {/* <p>{userInfo}</p> */}
+        <p>{nickName}</p>
       </div>
       <div className="info-btn">
         <button>비밀번호 변경</button>

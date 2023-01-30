@@ -4,7 +4,7 @@ import { asyncSignOut, asyncSignIn } from './api';
 const initialState = {
   isLogin: false,
   loading: false,
-  userInfo: {},
+  nickName: null,
   error: null,
   success: false,
 };
@@ -12,23 +12,14 @@ const initialState = {
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {
-    setSignIn: (state, payload) => {
-      state.userInfo = payload;
-    },
-    setSignOut(state) {
-      state = initialState;
-    },
-  },
+  reducers: {},
   extraReducers: {
     [asyncSignOut.pending]: (state) => {
       state.loading = true;
       state.error = null;
     },
     [asyncSignOut.fulfilled]: (state, { payload }) => {
-      state.loading = false;
-      state.success = true;
-      state.isLogin = false;
+      state = initialState;
     },
     [asyncSignOut.rejected]: (state, { payload }) => {
       state.loading = false;
@@ -42,7 +33,7 @@ const userSlice = createSlice({
       state.loading = false;
       state.success = true;
       state.isLogin = true;
-      state.userInfo = payload;
+      state.nickName = payload.nickName;
     },
     [asyncSignIn.rejected]: (state, { payload }) => {
       state.loading = false;
@@ -50,7 +41,5 @@ const userSlice = createSlice({
     },
   },
 });
-
-export const { setSignIn, setSignOut } = userSlice.actions;
 
 export default userSlice.reducer;
