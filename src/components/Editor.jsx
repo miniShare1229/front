@@ -88,7 +88,7 @@ function Editor() {
 
   const navigate = useNavigate();
 
-  let { isLogin, nickName, id, user } = useSelector((state) => state.user);
+  let { isLogin, nickName, id, user } = useSelector((state) => state.auth);
 
   const [addPost, { isLoading }] = useAddPostMutation();
 

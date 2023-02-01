@@ -12,7 +12,7 @@ const initialState = {
 };
 
 const userSlice = createSlice({
-  name: 'user',
+  name: 'auth',
   initialState,
   reducers: {},
   extraReducers: {
@@ -21,7 +21,7 @@ const userSlice = createSlice({
       state.error = null;
     },
     [asyncSignOut.fulfilled]: (state, { payload }) => {
-      state = initialState;
+      return initialState;
     },
     [asyncSignOut.rejected]: (state, { payload }) => {
       state.loading = false;

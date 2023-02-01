@@ -36,10 +36,9 @@ export const api = createApi({
   }),
 });
 
-export const asyncSignOut = createAsyncThunk('user/signout', async (data, { rejectWithValue }) => {
+export const asyncSignOut = createAsyncThunk('auth/signout', async (data, { rejectWithValue }) => {
   try {
     const res = await axios.get(`/delete`);
-
     return res.data;
   } catch (error) {
     if (error.response && error.response.data.message) {
@@ -50,7 +49,7 @@ export const asyncSignOut = createAsyncThunk('user/signout', async (data, { reje
   }
 });
 
-export const asyncSignIn = createAsyncThunk('user/signin', async (data, { rejectWithValue }) => {
+export const asyncSignIn = createAsyncThunk('auth/signin', async (data, { rejectWithValue }) => {
   try {
     const res = await axios.post(`/login`, data);
     return res.data;

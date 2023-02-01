@@ -63,7 +63,7 @@ const StyledMyPage = styled.div`
 `;
 
 function MyPage() {
-  let { isLogin, nickName, user, id } = useSelector((state) => state.user);
+  let { isLogin, nickName, user, id } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   if (!isLogin) {
     alert('로그인을 해주세요!');

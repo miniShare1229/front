@@ -42,7 +42,7 @@ const StyledGlobalSideBar = styled.div`
 `;
 
 function GlobalSideBar() {
-  const isLogin = useSelector((state) => state.user.isLogin);
+  const isLogin = useSelector((state) => state.auth.isLogin);
   const navigate = useNavigate();
 
   const moveToLists = (e) => {

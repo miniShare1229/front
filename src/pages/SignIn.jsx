@@ -92,13 +92,15 @@ export default function SignIn() {
   };
 
   const signIn = async ({ id: userId, pwd: userPw }) => {
-    const res = await dispatch(asyncSignIn({ id: userId, pwd: userPw })).unwrap();
-    if (res.code === 200) {
-      console.log('로그인 성공', res);
-      navigate('/');
-    } else {
-      console.log('로그인 실패');
-    }
+    const res = await dispatch(asyncSignIn({ id: userId, pwd: userPw }))
+      .unwrap()
+      .then((res) => {
+        if (res.code === 200) {
+          console.log('로그인 성공', res);
+          navigate('/');
+        }
+      })
+      .catch((res) => console.log('로그인 실패'));
   };
 
   const onSubmit = (e) => {

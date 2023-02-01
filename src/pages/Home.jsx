@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Editor from '../components/Editor';
 import styled from 'styled-components';
 import { Outlet } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const StyledHome = styled.div`
   display: flex;
@@ -12,10 +13,18 @@ const StyledHome = styled.div`
 `;
 
 function Home() {
+  let { isLogin, nickName, user, id } = useSelector((state) => state.auth);
+
   return (
     <StyledHome>
-      <Editor></Editor>
-      <Outlet />
+      {isLogin ? (
+        <>
+          <Editor />
+          <Outlet />
+        </>
+      ) : (
+        <p>miniShare에 오신 것을 환영합니다. 서비스를 이용하시려면 로그인을 해주세요</p>
+      )}
     </StyledHome>
   );
 }

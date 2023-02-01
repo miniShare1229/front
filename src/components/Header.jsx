@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { asyncSignOut } from '../api';
 
@@ -56,11 +56,20 @@ const StyledHeader = styled.header`
 `;
 
 function Header() {
-  const isLogin = useSelector((state) => state.user.isLogin);
+  const isLogin = useSelector((state) => state.auth.isLogin);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const onSubmit = (e) => {
-    dispatch(asyncSignOut());
+  const onSubmit = async (e) => {
+    const res = await dispatch(asyncSignOut())
+      .unwrap()
+      .then((res) => {
+        if (res.code === 200) {
+          console.log('로그아웃 성공', res);
+          navigate('/');
+        }
+      })
+      .catch((res) => console.log('로그아웃 실패'));
   };
 
   return (
