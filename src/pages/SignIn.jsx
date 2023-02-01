@@ -95,7 +95,7 @@ export default function SignIn() {
   const signIn = async ({ id: userId, pwd: userPw }) => {
     const res = await dispatch(asyncSignIn({ id: userId, pwd: userPw })).unwrap();
     if (res.code === 200) {
-      console.log('로그인 성공');
+      console.log('로그인 성공', res);
       navigate('/');
     } else {
       console.log('로그인 실패');
@@ -107,7 +107,6 @@ export default function SignIn() {
       alert('아이디나 비밀번호를 입력해주세요');
     } else {
       if (validateId(userId) && validatePw(userPw)) {
-        // api 응답 성공시 nickName 받을 예정
         signIn({ id: userId, pwd: userPw });
       }
     }

@@ -4,6 +4,7 @@ import { validateContent, validateTitle } from '../validation';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useAddPostMutation } from '../api';
+import { useLocation } from 'react-router-dom';
 
 const StyledEditor = styled.div`
   margin: 0 auto;
@@ -78,13 +79,16 @@ function Editor() {
     { value: '4', text: '최고에요 😀' },
   ];
 
+  const location = useLocation();
+  const path = location.pathname;
+
   const [inputValue, setInputValue] = useState({ title: '', content: '', icon: '2' });
 
   const { title, content, icon } = inputValue;
 
   const navigate = useNavigate();
 
-  const isLogin = useSelector((state) => state.user.isLogin);
+  let { isLogin, nickName, userId } = useSelector((state) => state.user);
 
   const [addPost, { isLoading }] = useAddPostMutation();
 
@@ -96,13 +100,17 @@ function Editor() {
   };
 
   const onSubmit = () => {
+    const data = {
+      ...inputValue,
+      nickName,
+      userId,
+    };
     if (isLogin) {
       if (validateTitle(title) && validateContent(content)) {
-        console.log(inputValue);
-        addPost({ postState: 'private', inputValue })
+        addPost({ postState: path.split('/')[2], data })
           .unwrap()
           .then((response) => {
-            console.log('res: ', response);
+            console.log('글쓰기 성공: ', response);
           })
           .catch((response) => console.error(response));
       }

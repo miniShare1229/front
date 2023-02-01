@@ -26,11 +26,10 @@ export const api = createApi({
       invalidatesTags: ['User'],
     }),
     addPost: build.mutation({
-      query: ({ postState, inputValue }) => ({
-        // private  / shared 구분 필요
+      query: ({ postState, data }) => ({
         url: `${postState}Submit`,
         method: 'POST',
-        body: inputValue,
+        body: data,
       }),
       invalidatesTags: ['Posts'],
     }),
@@ -41,7 +40,6 @@ export const asyncSignOut = createAsyncThunk('user/signout', async (data, { reje
   try {
     const res = await axios.get(`/delete`);
 
-    console.log('delete', data, res.data);
     return res.data;
   } catch (error) {
     if (error.response && error.response.data.message) {
@@ -55,7 +53,6 @@ export const asyncSignOut = createAsyncThunk('user/signout', async (data, { reje
 export const asyncSignIn = createAsyncThunk('user/signin', async (data, { rejectWithValue }) => {
   try {
     const res = await axios.post(`/login`, data);
-    console.log('login', data, res.data);
     return res.data;
   } catch (error) {
     if (error.response && error.response.data.message) {
