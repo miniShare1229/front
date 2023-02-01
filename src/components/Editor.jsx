@@ -88,7 +88,7 @@ function Editor() {
 
   const navigate = useNavigate();
 
-  let { isLogin, nickName, userId } = useSelector((state) => state.user);
+  let { isLogin, nickName, id, user } = useSelector((state) => state.user);
 
   const [addPost, { isLoading }] = useAddPostMutation();
 
@@ -103,7 +103,8 @@ function Editor() {
     const data = {
       ...inputValue,
       nickName,
-      userId,
+      id,
+      user,
     };
     if (isLogin) {
       if (validateTitle(title) && validateContent(content)) {
@@ -119,6 +120,7 @@ function Editor() {
       navigate('/sign-in');
     }
   };
+
   return (
     <StyledEditor>
       <input

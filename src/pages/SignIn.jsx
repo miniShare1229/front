@@ -80,7 +80,6 @@ const StyledSignIn = styled.div`
 
 export default function SignIn() {
   const dispatch = useDispatch();
-  //input 데이터 모아서 사용
   const [inputValue, setInputValue] = useState({ userId: '', userPw: '' });
   const navigate = useNavigate();
   const { userId, userPw } = inputValue;

@@ -5,7 +5,8 @@ const initialState = {
   isLogin: false,
   loading: false,
   nickName: null,
-  userId: null,
+  user: null,
+  id: null,
   error: null,
   success: false,
 };
@@ -35,7 +36,8 @@ const userSlice = createSlice({
       state.success = true;
       state.isLogin = true;
       state.nickName = payload.nickname;
-      state.userId = payload.id;
+      state.user = payload.user;
+      state.id = payload.id;
     },
     [asyncSignIn.rejected]: (state, { payload }) => {
       state.loading = false;
